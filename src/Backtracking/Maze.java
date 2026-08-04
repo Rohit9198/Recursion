@@ -77,7 +77,7 @@ public class Maze {
             System.out.println(p);
             return;
         }
-        if(maze[r][c]){
+        if(!maze[r][c]){
             return;
         }
         if(r < maze.length - 1){
