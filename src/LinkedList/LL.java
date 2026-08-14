@@ -1,5 +1,7 @@
 package LinkedList;
 
+import org.w3c.dom.Node;
+
 public class LL {
 
     private Node head;
@@ -39,8 +41,8 @@ public class LL {
         size++;
     }
 
-    public void insertLast(int val){
-        if(tail  == null){
+    public void insertLast(int val) {
+        if (tail == null) {
             insertFirst(val);
             return;
         }
@@ -50,17 +52,17 @@ public class LL {
         size++;
     }
 
-    public void insert(int val, int index){
-        if(index == 0){
+    public void insert(int val, int index) {
+        if (index == 0) {
             insertFirst(val);
             return;
         }
-        if(index ==  size){
+        if (index == size) {
             insertLast(val);
             return;
         }
         Node temp = head;
-        for(int i=1; i< index; i++){
+        for (int i = 1; i < index; i++) {
             temp = temp.next;
         }
 
@@ -70,11 +72,12 @@ public class LL {
     }
 
     //insert using recursion
-    public void insertRec(int val, int index){
+    public void insertRec(int val, int index) {
         head = insertRec(val, index, head);
     }
-    private Node insertRec(int val, int index, Node node){
-        if(index == 0){
+
+    private Node insertRec(int val, int index, Node node) {
+        if (index == 0) {
             Node temp = new Node(val, node);
             size++;
 
@@ -83,8 +86,9 @@ public class LL {
         node.next = insertRec(val, index - 1, node.next);
         return node;
     }
-    public int deleteLast(){
-        if(size <= 1){
+
+    public int deleteLast() {
+        if (size <= 1) {
             return deleteFirst();
         }
         Node secondLast = get(size - 2);
@@ -94,11 +98,11 @@ public class LL {
         return val;
     }
 
-    public int delete(int index){
-        if(index == 0){
+    public int delete(int index) {
+        if (index == 0) {
             return deleteFirst();
         }
-        if(index == size - 1){
+        if (index == size - 1) {
             return deleteLast();
         }
         Node prev = get(index - 1);
@@ -109,10 +113,10 @@ public class LL {
         return val;
     }
 
-    public Node find(int value){
+    public Node find(int value) {
         Node node = head;
-        while(node != null){
-            if(node.value == value){
+        while (node != null) {
+            if (node.value == value) {
                 return node;
             }
             node = node.next;
@@ -120,23 +124,24 @@ public class LL {
         return null;
     }
 
-    public Node get(int index){
+    public Node get(int index) {
         Node node = head;
-        for(int i =0; i< index; i++){
+        for (int i = 0; i < index; i++) {
             node = node.next;
         }
         return node;
     }
 
-    public int deleteFirst(){
+    public int deleteFirst() {
         int val = head.value;
         head = head.next;
-        if(head == null){
+        if (head == null) {
             tail = null;
         }
         size--;
         return val;
     }
+
     public void display() {
 
         Node temp = head;
@@ -147,5 +152,36 @@ public class LL {
         }
 
         System.out.println("END");
+    }
+
+//questions
+
+    public void duplicates() {
+        Node node = head;
+
+        while(node.next != null){
+            if(node.value == node.next.value){
+                node.next = node.next.next;
+                size--;
+            }else{
+                node = node.next;
+            }
+        }
+        tail = node;
+        tail.next = null;
+    }
+
+    public static void main(String[] args) {
+        LL list = new LL();
+        list.insertLast(1);
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        list.insertLast(3);
+        list.insertLast(3);
+
+        list.display();
+        list.duplicates();
+        list.display();
     }
 }
