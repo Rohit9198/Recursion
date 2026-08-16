@@ -222,4 +222,58 @@ public class LL {
 //        list.duplicates();
 //        list.display();
     }
+    public void bubbleSort() {
+        bubbleSort(size - 1, 0);
+    }
+
+    private void bubbleSort(int row, int col) {
+
+        if (row == 0) {
+            return;
+        }
+
+        if (col < row) {
+
+            Node first = get(col);
+            Node second = get(col + 1);
+
+            if (first.value > second.value) {
+
+                // Case 1: first node is head
+                if (first == head) {
+
+                    head = second;
+                    first.next = second.next;
+                    second.next = first;
+                }
+
+                // Case 2: second node is tail
+                else if (second == tail) {
+
+                    Node prev = get(col - 1);
+
+                    prev.next = second;
+                    tail = first;
+
+                    first.next = null;
+                    second.next = first;
+                }
+
+                // Case 3: nodes are in the middle
+                else {
+
+                    Node prev = get(col - 1);
+
+                    prev.next = second;
+                    first.next = second.next;
+                    second.next = first;
+                }
+            }
+
+            bubbleSort(row, col + 1);
+
+        } else {
+            bubbleSort(row - 1, 0);
+        }
+    }
 }
