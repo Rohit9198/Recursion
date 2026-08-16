@@ -13,6 +13,7 @@ public class happy {
         System.out.println(result);
     }
 
+    // Happy Number
     public boolean isHappy(int n) {
 
         int slow = n;
@@ -38,5 +39,19 @@ public class happy {
         }
 
         return ans;
+    }
+
+    // Middle of the Linked List
+    public ListNode middleNode(ListNode head) {
+
+        ListNode s = head;
+        ListNode f = head;
+
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
+        }
+
+        return s;
     }
 }
